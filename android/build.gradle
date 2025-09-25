@@ -2,14 +2,14 @@ group 'com.example.flutter_sms'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.7.10'
+    ext.kotlin_version = '1.9.24' // Use latest stable Kotlin
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.4'
+        classpath 'com.android.tools.build:gradle:8.3.0' // Use latest stable AGP
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -17,7 +17,7 @@ buildscript {
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -26,14 +26,21 @@ apply plugin: 'kotlin-android'
 
 android {
     namespace 'com.example.flutter_sms'
-    compileSdkVersion 31
+    compileSdkVersion 34 // Use latest stable SDK
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21 // Recommended minimum for modern plugins
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+    kotlinOptions {
+        jvmTarget = '21'
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -41,5 +48,51 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
+
+// group 'com.example.flutter_sms'
+// version '1.0-SNAPSHOT'
+
+// buildscript {
+//     ext.kotlin_version = '1.7.10'
+//     repositories {
+//         google()
+//         jcenter()
+//     }
+
+//     dependencies {
+//         classpath 'com.android.tools.build:gradle:3.5.4'
+//         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//     }
+// }
+
+// rootProject.allprojects {
+//     repositories {
+//         google()
+//         jcenter()
+//     }
+// }
+
+// apply plugin: 'com.android.library'
+// apply plugin: 'kotlin-android'
+
+// android {
+//     namespace 'com.example.flutter_sms'
+//     compileSdkVersion 31
+
+//     sourceSets {
+//         main.java.srcDirs += 'src/main/kotlin'
+//     }
+//     defaultConfig {
+//         minSdkVersion 16
+//         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//     }
+//     lintOptions {
+//         disable 'InvalidPackage'
+//     }
+// }
+
+// dependencies {
+//     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+// }
